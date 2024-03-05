@@ -2,8 +2,11 @@
 
 @section('body')
 <div class="d-flex align-items-center justify-content-between">
-    <h1 class="mb-0">List Buku</h1>
-    <a  href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Buku</a>
+    <h1 class="mb-3">List Buku</h1>
+    <div class="justify-content-center">
+    <a class="btn btn-primary" href="{{ route('buku.create') }}" >Tambah +</a>
+    <a class="btn btn-primary" href="{{route('cetakbuku')}}" target="_blank"><i class="fa fa-print"></i> Cetak PDF </a>
+</div>
 </div>
 <hr />
 @if(Session::has('success'))
@@ -11,7 +14,7 @@
     {{ Session::get('success') }}
 </div>
 @endif
-<table class="table table-hover">
+<table id="example" class="table table-stripped" style="width: 100%">
     <thead class="table-primary">
         <tr>
             <th>#</th>
@@ -19,6 +22,7 @@
             <th>Penulis</th>
             <th>Penerbit</th>
             <th>TahunTerbit</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +39,7 @@
                     <a href="{{ route('buku.show', $rs->id) }}" type="button" class="btn btn-secondary">Detail</a>
                     <a href="{{ route('buku.edit', $rs->id) }}" type="button" class="btn btn-warning">Edit</a>
                     <form action="{{ route('buku.destroy', $rs->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
-                    @csrf
+                        @csrf
                     @method('DELETE')
                     <button class="btn btn-danger m-0">Delete</button>
                     </form>
@@ -50,4 +54,7 @@
         @endif
     </tbody>
 </table>
+<script >
+    new DataTable('#example');
+</script>
 @endsection

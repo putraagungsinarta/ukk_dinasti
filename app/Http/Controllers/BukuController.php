@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Buku;
+use PDF;
 
 class BukuController extends Controller
 {
@@ -40,7 +41,8 @@ class BukuController extends Controller
      */
     public function show(string $id)
     {
-        $buku = Buku::findOrFail($id);
+    
+        $buku = Buku::where('id',$id)->first();
 
         return view('buku.show', compact('buku'));
     }
@@ -77,5 +79,12 @@ class BukuController extends Controller
         $buku->delete();
 
         return redirect()->route('buku.index')->with('success', 'product deleted successfully');
+    }
+
+    public function cetakbuku() 
+    {
+       $buku = Buku::select('*')->get();
+       $pdf = PDF::loadView('buku.cetakbuku', ['buku' => $buku]);
+       return $pdf->stream('Laporan-Data-Buku.pdf');
     }
 }

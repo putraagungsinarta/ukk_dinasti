@@ -15,5 +15,6 @@ class Buku extends Model
         'penerbit',
         'tahunterbit'
     ];
-    protected $table="buku";
+    protected $table= "buku";
+    
 }

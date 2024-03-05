@@ -18,7 +18,7 @@ class AuthController extends Controller
     }
 
     public function register()
-{
+    {
         return view('register');
     }
 
@@ -26,11 +26,6 @@ class AuthController extends Controller
     {
         $buku = Buku::all();
         return view('buku.index', compact('buku'));
-    }
-
-    public function logout(Request $request)
-    {
-        
     }
 
 }

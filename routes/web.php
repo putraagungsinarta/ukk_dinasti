@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'authenticating']);
-Route::get('register', [AuthController::class, 'registerProcess']);
+Route::post('register', [AuthController::class, 'register']);
 
 Route::resource('/buku', BukuController::class);
-
+Route::get('buku/cetak',[BukuController::class, 'cetakbuku'])->name('cetakbuku');
